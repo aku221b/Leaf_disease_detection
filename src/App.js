@@ -4,8 +4,25 @@ import RightWindow from "./components/RightWindow/RightWindow.js";
 
 function App() {
   const [showResults, setShowResults] = useState(false)
-  const handleAnalyseOpen = () => {
-    setShowResults(true)
+  const handleAnalyseOpen = (image) => {
+    if(image)
+    {
+      const url = 'http://127.0.0.1:8000/upload/'
+  
+      fetch(url, {
+        mode: 'no-cors',
+        method: 'POST',
+        body: {data: image} // Convert the data to JSON
+      })
+      .then((response) => console.log(response))
+      // .then((data) => {
+      //   console.log(data)
+      //   setShowResults(true)
+      // })
+      .catch((e) => console.log(e))
+      
+    }
+    
   }
   const handleAnalyseClose = () => {
     setShowResults(false)

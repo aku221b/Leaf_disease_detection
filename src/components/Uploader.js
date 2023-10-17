@@ -118,7 +118,7 @@ function Uploader(props) {
           backgroundColor: "#343A40",
           cursor: "pointer"
         }} 
-          onClick={props.handleAnalyseOpen}>
+          onClick={() => props.handleAnalyseOpen(uploadedImage)}>
           <p style={{
             color: '#FFF',
             fontFamily: 'Inter',
