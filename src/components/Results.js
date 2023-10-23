@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Results() {
+function Results(props) {
   return (
     <div style={{
         display: "flex",
@@ -13,16 +13,27 @@ function Results() {
         }}>
             Results
         </h1>
+
         <div style={{
             display: 'flex',
             height: '80%',
             justifyContent: "space-between"
         }}>
+
             <div style={{
                 width: "60%",
                 borderRadius: "20px",
-                background: "#ADB5BD"
-            }}>
+                background: "#ADB5BD",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>{props.resultImage ? <img id="image-upload-img" src={props.resultImage} alt="" style={{
+                overflow: "hidden",
+                width: "200px",
+                height: "auto",
+                paddingTop: "1rem",
+                }} /> : ""}
+
             </div>
             <div style={{
                 width: "30%",

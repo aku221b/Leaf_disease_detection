@@ -1,31 +1,37 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Sep 13 03:49:44 2023
-
-@author: asus
-"""
-
-from typing import Union
-from fastapi import FastAPI, File,UploadFile
-import uuid
+from flask import Flask, request, send_file, jsonify
 import cv2
 import ultralytics
+
+app = Flask(__name__)
+
+# Ultralytics initialization
 ultralytics.checks()
 from ultralytics import YOLO
 model = YOLO('best.pt')
 
-app=FastAPI()
+# Enable CORS
+from flask_cors import CORS
 
-@app.get('/')
+CORS(app, resources={r"/upload/*": {"origins": "http://localhost:3000"}})
+
+@app.route('/')
 def read_root():
-    return {"Hello":"world"}
+    return jsonify({"Hello": "world"})
 
+@app.route('/upload/', methods=['POST'])
+def create_upload_file():
 
-@app.post('/upload/')
-async def create_upload_file():
-   
-    results = model(f"images/test.jpg", save=True, conf = 0.8)
+    # Perform YOLO detection
+    results = model('images/test.jpg', save=True, conf=0.8)
     plot = results[0].plot()
-   
+
+    # Save the result image
     cv2.imwrite('img.jpg', plot)
-    return  {"result": "success"}  
+
+    # Send the result image as a response
+    return send_file('img.jpg')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+ 

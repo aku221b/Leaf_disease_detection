@@ -3,11 +3,10 @@ import Upload from "../utils/Upload.png"
 import {Circles} from 'react-loader-spinner';
 
 function Uploader(props) {
-  const uploadImageref = useRef(null);
   const [uploadedImage, setUploadedImage] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const uploadImageref = useRef(null);
   const handleImageUpload = (event) => {
-    setLoading(true)
+    props.setLoading(true)
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       const reader = new FileReader();
@@ -17,7 +16,7 @@ function Uploader(props) {
       reader.readAsDataURL(selectedFile); // Read the file as a data URL
     }
     setUploadedImage(selectedFile)
-    setLoading(false)
+    props.setLoading(false)
   }
   const handleImageClick = () => {
     if (uploadImageref.current) {
@@ -55,8 +54,8 @@ function Uploader(props) {
         justifyContent: "center",
         alignItems: "center"
       }}>
-        {loading ? <Circles /> : ""}
-        {!loading ? (uploadedImage 
+        {props.loading ? <Circles /> : ""}
+        {!props.loading ? (uploadedImage 
         ? 
         <img id="image-upload-img" src={uploadedImage} alt="" style={{
           overflow: "hidden",
@@ -64,7 +63,7 @@ function Uploader(props) {
           height: "auto",
           paddingTop: "1rem",
         }} /> 
-        : 
+        :
         <img id="image-upload-img" src={Upload} alt="" style={{
           overflow: "hidden",
           width: "200px",
@@ -79,7 +78,7 @@ function Uploader(props) {
           fontStyle: 'normal',
           fontWeight: '700',
           lineHeight: 'normal'
-        }}  >CHOOSE SCAN</h1>
+        }}>{props.loading? "PLEASE WAIT": "CHOOSE SCAN"}</h1>
       </div>
       <div
         style={{
@@ -96,8 +95,6 @@ function Uploader(props) {
           borderRadius: '25px',
           border: '4px solid #000',
           backgroundColor: "#E9ECEF",
-          display: "flex",
-          justifyContent: "center",
           cursor: "pointer"
         }} onClick={handleImageClick}
         ><p style={{
@@ -108,7 +105,7 @@ function Uploader(props) {
           fontWeight: '400',
           lineHeight: 'normal',
           margin: "0", 
-          padding: "8px"}}>
+          padding: "0"}}>
             Upload
           </p></button>
         <button style={{
