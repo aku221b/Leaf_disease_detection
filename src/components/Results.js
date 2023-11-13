@@ -20,7 +20,7 @@ function Results(props) {
             justifyContent: "space-between"
         }}>
 
-            <div style={{
+            <div className='main_div' style={{
                 width: "60%",
                 borderRadius: "20px",
                 background: "#ADB5BD",
@@ -33,7 +33,9 @@ function Results(props) {
                 height: "auto",
                 paddingTop: "1rem",
                 }} /> : ""}
+                <div className=' image selector'>
 
+                </div>
             </div>
             <div style={{
                 width: "30%",
