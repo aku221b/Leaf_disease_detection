@@ -21,9 +21,8 @@ def read_root():
 
 @app.route('/upload/', methods=['POST'])
 def create_upload_file():
-
     # Perform YOLO detection
-    results = model('images/test.jpg', save=True, conf=0.8)
+    results = model('images/test.jpg', save = True)
     plot = results[0].plot()
 
     # Save the result image

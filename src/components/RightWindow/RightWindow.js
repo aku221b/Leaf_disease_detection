@@ -9,7 +9,7 @@ function RightWindow(props) {
         display: "flex",
         justifyContent: "center",
     }}>
-      {props.showResults ? <Results resultImage = {props.resultImage}/> : 
+      {true ? <Results resultImage = {props.resultImage}/> : 
       <Uploader 
         handleAnalyseOpen={props.handleAnalyseOpen} 
         loading  = {props.loading}
