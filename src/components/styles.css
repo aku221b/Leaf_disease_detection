@@ -1,0 +1,13 @@
+.button-styles{
+    border-radius: 15px;
+    background: #343A40;
+    cursor: pointer
+}
+.button-text{
+    color: #FFF;
+    font-family: Inter;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-Height: normal;
+}

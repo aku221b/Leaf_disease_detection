@@ -1,6 +1,18 @@
 import React from 'react'
+import ImageCarousel from './ImageCarousel'
+import "./styles.css"
+import img1 from "../utils/carousel_test-images/1.png"
+import img2 from "../utils/carousel_test-images/3.png"
 
 function Results(props) {
+
+    const carouselImageClickHandler = (e) => {
+        console.log(e)
+    }
+    const images = [
+        img1,
+        img2,
+      ];
   return (
     <div style={{
         display: "flex",
@@ -20,21 +32,21 @@ function Results(props) {
             justifyContent: "space-between"
         }}>
 
-            <div className='main_div' style={{
+            <div className='Left_panel' style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-around",
                 width: "60%",
                 borderRadius: "20px",
                 background: "#ADB5BD",
                 display: "flex",
-                justifyContent: "center",
                 alignItems: "center"
             }}>{props.resultImage ? <img id="image-upload-img" src={props.resultImage} alt="" style={{
-                overflow: "hidden",
                 width: "200px",
                 height: "auto",
-                paddingTop: "1rem",
                 }} /> : ""}
-                <div className=' image selector'>
-
+                <div className=' image_selector' style={{width: "100%"}}>
+                    <ImageCarousel images = {images} carouselImageClickHandler = {carouselImageClickHandler}/>
                 </div>
             </div>
             <div style={{
@@ -55,19 +67,9 @@ function Results(props) {
                       background: '#ADB5BD'
                         }}>
                 </div>
-                  <button style={{ 
-                      height: "10%",
-                      borderRadius: '15px',
-                      background: '#343A40',
-                      cursor: "pointer" }}>
-                      <span style={{
-                            color: '#FFF',
-                            fontFamily: 'Inter',
-                            fontSize: '26px',
-                            fontStyle: 'normal',
-                            fontWeight: '400',
-                            lineHeight: 'normal'
-                      }}>Save</span>
+                  <button className='button-styles'style={{ 
+                      height: "10%"}}>
+                      <span className='button-text'>Analyse</span>
                 </button>
             </div>
         </div>

@@ -29,11 +29,12 @@ function App() {
         body: JSON.stringify({data: image}) // Convert the data to JSON
       })
       .then((response) => {
-        return response.blob();
+        return response.json();
       })
-      .then(blob => {
-        const imageUrl = URL.createObjectURL(blob);
-        setResultImage(imageUrl)
+      .then(data => {
+        // const imageUrl = URL.createObjectURL(blob);
+        // console.log(data.img)
+        setResultImage(data.img)
         setLoading(false);
         setShowResults(true);
       })
