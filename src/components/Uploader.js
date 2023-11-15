@@ -4,10 +4,12 @@ import {Circles} from 'react-loader-spinner';
 
 function Uploader(props) {
   const [uploadedImage, setUploadedImage] = useState(null);
+  const [selectedimagefile, setSelectedimagefile] = useState(null)
   const uploadImageref = useRef(null);
   const handleImageUpload = (event) => {
     props.setLoading(true)
     const selectedFile = event.target.files[0];
+    setSelectedimagefile(selectedFile)
     if (selectedFile) {
       const reader = new FileReader();
       reader.onload = (event) => {
@@ -115,7 +117,7 @@ function Uploader(props) {
           backgroundColor: "#343A40",
           cursor: "pointer"
         }} 
-          onClick={() => props.handleAnalyseOpen(uploadedImage)}>
+          onClick={() => props.handleAnalyseOpen(selectedimagefile)}>
           <p style={{
             color: '#FFF',
             fontFamily: 'Inter',

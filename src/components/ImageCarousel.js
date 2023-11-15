@@ -5,7 +5,7 @@ const ImageCarousel = ({ images, setResultImage}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const carouselImageClickHandler = () => {
-    setResultImage(images[currentIndex]["img"])
+    setResultImage(images[currentIndex])
   }
 
   const goToNextImage = () => {
@@ -23,7 +23,7 @@ const ImageCarousel = ({ images, setResultImage}) => {
             &lt; Prev
         </span> 
       </button>
-      <img src={images[currentIndex]["img"]} alt={`Image ${currentIndex + 1}`} style={{
+      <img src={images[currentIndex]} alt={`Image ${currentIndex + 1}`} style={{
         width: "100px", height: "100px", cursor: "pointer" 
       }} onClick={(e) => carouselImageClickHandler(e)}/>
       <button onClick={goToNextImage} className='button-styles' style={{height: "30px"}}>

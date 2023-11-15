@@ -7,6 +7,8 @@ function App() {
   const [showResults, setShowResults] = useState(false)
   const [loading, setLoading] = useState(false)
   const [resultImage, setResultImage] = useState(null);
+  const [subimages, setSubimages] = useState(null)
+  const [imagedata, setImageData] = useState(null)
   const handleAnalyseOpen = async  (image) => {
     if(image)
     {
@@ -16,32 +18,21 @@ function App() {
       setLoading(true)
       const url = "http://localhost:5000/upload/"
       
-      let headers = new Headers();
-
-      headers.append('Content-Type', 'application/json');
-      headers.append('Accept', 'application/json');
-
-      headers.append('Access-Control-Allow-Origin', 'http://localhost:3000');
-      headers.append('Access-Control-Allow-Credentials', 'true');
-
-      headers.append('GET', 'POST', 'OPTIONS');
       fetch(url, {
         method: 'POST',
-        crossorigin: true,
-        headers: headers,
-        body: data  // Convert the data to JSON
+        body: data // Convert the data to JSON
       })
       .then((response) => {
+        console.log(image)
         return response.json();
       })
-      .then(data => {
-        // const imageUrl = URL.createObjectURL(blob);
-        // console.log(data.img)
-        setResultImage(data.img)
+      .then(image => {
+        setImageData(image)
+        setSubimages(image.image_array)
+        setResultImage(image.img)
         setLoading(false);
         setShowResults(true);
       })
-      .catch(e => console.log(e))
     }
     
   }
@@ -65,7 +56,10 @@ function App() {
       loading = {loading}
       setLoading = {setLoading} 
       resultImage = {resultImage}
-      setResultImage = {setResultImage}/>
+      setResultImage = {setResultImage}
+      subimages = {subimages}
+      imagedata = {imagedata}/>
+      
     </div>
   );
 }

@@ -54,7 +54,7 @@ function Results(props) {
                 height: "auto",
                 }} /> : ""}
                 <div className=' image_selector' style={{width: "100%"}}>
-                    <ImageCarousel setResultImage = {setResultImage} images = {images} carouselImageClickHandler = {carouselImageClickHandler}/>
+                    <ImageCarousel setResultImage = {setResultImage} images = {props.subimages} carouselImageClickHandler = {carouselImageClickHandler}/>
                 </div>
             </div>
             <div style={{
@@ -71,9 +71,9 @@ function Results(props) {
                     }}
                     className='stats'>
                          <ul>
-                            <li> Image Resoultion : <span style={{fontWeight: "1000"}}>{stats.resolution}</span></li>
-                            <li>Time Taken for model to run : <span style={{fontWeight: "1000"}}>{stats.time_taken}</span></li>
-                            <li>Number of Images Detected : <span style={{fontWeight: "1000"}}>{stats.number_of_images_detected}</span></li>
+                            <li> Image Resoultion : <span style={{fontWeight: "1000"}}>{props.imagedata.height} x {props.imagedata.width}</span></li>
+                            <li>Time Taken for model to run : <span style={{fontWeight: "1000"}}>{props.imagedata.elapsed_time}</span></li>
+                            <li>Number of Images Detected : <span style={{fontWeight: "1000"}}>{props.imagedata.image_array.length}</span></li>
                         </ul>
                 </div>
                   <div style={{ height: "50%",
