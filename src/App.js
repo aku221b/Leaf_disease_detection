@@ -10,6 +10,9 @@ function App() {
   const handleAnalyseOpen = async  (image) => {
     if(image)
     {
+      const data = new FormData();
+      data.append("image", image)
+
       setLoading(true)
       const url = "http://localhost:5000/upload/"
       
@@ -26,7 +29,7 @@ function App() {
         method: 'POST',
         crossorigin: true,
         headers: headers,
-        body: JSON.stringify({data: image}) // Convert the data to JSON
+        body: data  // Convert the data to JSON
       })
       .then((response) => {
         return response.json();

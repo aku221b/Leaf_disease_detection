@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import "./styles.css"
 
-const ImageCarousel = ({ images , carouselImageClickHandler}) => {
+const ImageCarousel = ({ images, setResultImage}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const carouselImageClickHandler = () => {
+    setResultImage(images[currentIndex]["img"])
+  }
 
   const goToNextImage = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -19,7 +23,7 @@ const ImageCarousel = ({ images , carouselImageClickHandler}) => {
             &lt; Prev
         </span> 
       </button>
-      <img src={images[currentIndex]} alt={`Image ${currentIndex + 1}`} style={{
+      <img src={images[currentIndex]["img"]} alt={`Image ${currentIndex + 1}`} style={{
         width: "100px", height: "100px", cursor: "pointer" 
       }} onClick={(e) => carouselImageClickHandler(e)}/>
       <button onClick={goToNextImage} className='button-styles' style={{height: "30px"}}>

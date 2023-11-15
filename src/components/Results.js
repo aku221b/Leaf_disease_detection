@@ -1,8 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ImageCarousel from './ImageCarousel'
 import "./styles.css"
-import img1 from "../utils/carousel_test-images/1.png"
-import img2 from "../utils/carousel_test-images/3.png"
 
 function Results(props) {
 
@@ -10,9 +8,19 @@ function Results(props) {
         console.log(e)
     }
     const images = [
-        img1,
-        img2,
+        {"img": "http://localhost:5000/images/newimg0.jpg"},
+        {"img": "http://localhost:5000/images/newimg1.jpg"},
+        {"img": "http://localhost:5000/images/newimg2.jpg"},
+        {"img": "http://localhost:5000/images/newimg3.jpg"},
+        {"img": "http://localhost:5000/images/newimg4.jpg"},
       ];
+    const stats = {
+        "resolution": "250 x 300",
+        "time_taken": "3.2s",
+        "number_of_images_detected": "5",
+    }
+
+    const [selectedimage, setResultImage] = useState(null)
   return (
     <div style={{
         display: "flex",
@@ -46,7 +54,7 @@ function Results(props) {
                 height: "auto",
                 }} /> : ""}
                 <div className=' image_selector' style={{width: "100%"}}>
-                    <ImageCarousel images = {images} carouselImageClickHandler = {carouselImageClickHandler}/>
+                    <ImageCarousel setResultImage = {setResultImage} images = {images} carouselImageClickHandler = {carouselImageClickHandler}/>
                 </div>
             </div>
             <div style={{
@@ -59,13 +67,24 @@ function Results(props) {
                   <div style={{
                       height: "20%", 
                       borderRadius: '20px',
-                      background: '#ADB5BD'
-                    }}>
+                      background: '#ADB5BD',
+                    }}
+                    className='stats'>
+                         <ul>
+                            <li> Image Resoultion : <span style={{fontWeight: "1000"}}>{stats.resolution}</span></li>
+                            <li>Time Taken for model to run : <span style={{fontWeight: "1000"}}>{stats.time_taken}</span></li>
+                            <li>Number of Images Detected : <span style={{fontWeight: "1000"}}>{stats.number_of_images_detected}</span></li>
+                        </ul>
                 </div>
                   <div style={{ height: "50%",
                       borderRadius: '20px',
-                      background: '#ADB5BD'
-                        }}>
+                      background: '#ADB5BD',
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center"
+                        }}
+                    >
+                       <img src = {selectedimage} style={{width: "60%", height: "60%", padding: "1rem"}}></img> 
                 </div>
                   <button className='button-styles'style={{ 
                       height: "10%"}}>
