@@ -11,10 +11,10 @@ import cv2
 import ultralytics
 import os
 
-root_dir = "C://Users//Akshat//UGP2023//Leaf_disease_detection//src//database"
+root_dir = "D://New folder//Leaf_disease_detection//src//database"
 mapped_dir = "http://localhost:5000/images"
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-UPLOAD_FOLDER = 'C://Users//Akshat//UGP2023//Leaf_disease_detection//src//database'
+UPLOAD_FOLDER = 'D://New folder//Leaf_disease_detection//src//database'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -38,7 +38,7 @@ def read_root():
 
 @app.route('/images/<filename>')
 def serve_image(filename):
-    return send_from_directory(r'C:\Users\Akshat\UGP2023\Leaf_disease_detection\src\database', filename)
+    return send_from_directory('D://New folder//Leaf_disease_detection//src//database', filename)
 
 def allowed_file(filename):
     return '.' in filename and \
