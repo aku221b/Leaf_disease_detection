@@ -3,6 +3,7 @@ from flask import Flask, request, send_file, jsonify
 from flask import flash ,redirect, url_for
 from werkzeug.utils import secure_filename
 import time
+from urllib.parse import urlparse
 
 
 from flask import send_from_directory
@@ -10,6 +11,7 @@ import cv2
 import ultralytics
 import os
 
+root_dir = "C://Users//Akshat//UGP2023//Leaf_disease_detection//src//database"
 mapped_dir = "http://localhost:5000/images"
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 UPLOAD_FOLDER = 'C://Users//Akshat//UGP2023//Leaf_disease_detection//src//database'
@@ -27,7 +29,8 @@ model = YOLO('best.pt')
 # Enable CORS
 from flask_cors import CORS
 
-CORS(app, resources={r"/upload/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/upload/*": {"origins": "http://localhost:3000"},
+                     r"/rgbToGrayScale/*": {"origins": "http://localhost:3000"}})
 
 @app.route('/')
 def read_root():
@@ -100,61 +103,26 @@ def create_upload_file():
         # Send the result image as a response
         return jsonify({"img": img_url, "image_array": sub_image_array, 'elapsed_time': elapsed_time, "height": height, "width": width})
 
-# @app.route('/rgbToGrayScale/', methods=['POST'])
-# def create_upload_file():
-#     # Perform YOLO detection
-#     if 'image' not in request.files:
-#         flash('No image part')
-#         print('No image part')
-#         return jsonify({"img": "bad request"})
-    
-#     file = request.files['image']
-#     # if user does not select file, browser also
-#     # submit an empty part without filename
-#     if file.filename == '':
-#         flash('No selected file')
-#         print('No selected file')
-#         return jsonify({"img": "bad request"})
-    
-#     if file and allowed_file(file.filename):
-
-#         print("i am here")
-
-#         filename = file.filename
-
-#         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-
-#         file.save(file_path)
-
-#         image = cv2.imread(file_path)
-
-#         start_time = time.time()
-
-#         results = model(image, save = True)
-
-#         end_time = time.time()
-
-#         elapsed_time = round(end_time - start_time, 2)
-
-#         plot = results[0].plot()
-
-#         sub_image_array = []
-
-#         for result in results:
-
-#             boxes=result.boxes
-#             # print(boxes.xyxy)
-#             sub_image_array = crop_image(boxes.xyxy, plot)
-
-#         save_path = f"{app.config['UPLOAD_FOLDER']}//img.jpg"
-
-#         cv2.imwrite(save_path, plot)
+@app.route('/rgbToGrayScale/', methods=['POST'])
+def convert_to_rgb():
         
-#         img_url = f"{mapped_dir}/img.jpg"
-#         # Save the result image
+       data = request.json  # Access the JSON data from the request body
+       selected_image = data.get('image')  # Access the 'image' property from the JSON data
+       print(selected_image)
+       parsed_url = urlparse(selected_image)
+       filename = os.path.basename(parsed_url.path)
+       image = cv2.imread(f"{root_dir}//{filename}")
+       grayscale_image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+
+       save_path = f"{app.config['UPLOAD_FOLDER']}//greyscale.jpg"
+
+       cv2.imwrite(save_path, grayscale_image)
         
-#         # Send the result image as a response
-#         return jsonify({"img": img_url, "image_array": sub_image_array, 'elapsed_time': elapsed_time, "height": height, "width": width})       
+       img_url = f"{mapped_dir}/greyscale.jpg"
+        # Save the result image
+
+       return jsonify({"img": img_url})    
+       
 def crop_image(box_coordinates,img):
     # Iterate through each box and crop the corresponding region
     image_array = []
@@ -168,8 +136,6 @@ def crop_image(box_coordinates,img):
 
         # Crop the image
         cropped_img = img[y1:y2,x1:x2]
-
-        root_dir = "C://Users//Akshat//UGP2023//Leaf_disease_detection//src//database"
         # Save the cropped image
 
         img_path = f'{root_dir}//newimg{i}.jpg'

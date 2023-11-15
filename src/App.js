@@ -10,6 +10,7 @@ function App() {
   const [subimages, setSubimages] = useState(null)
   const [imagedata, setImageData] = useState(null)
   const handleAnalyseOpen = async  (image) => {
+    console.log(image)
     if(image)
     {
       const data = new FormData();

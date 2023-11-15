@@ -1,0 +1,25 @@
+.slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    cursor: ew-resize;
+  }
+  
+  img {
+    height: auto;
+    display: block;
+  }
+  
+  .slider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 5px; /* Adjust the width of the slider */
+    background-color: #3498db; /* Adjust the color of the slider */
+    cursor: ew-resize;
+  }
+  
+  .slider:hover {
+    background-color: #2980b9; /* Adjust the color of the slider on hover */
+  }
+  
