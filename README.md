@@ -24,4 +24,19 @@ To get started with this project, follow these steps:
    ```
    npm start
    ```
+### Interface
 
+1. Home Page
+    ![plot](./src/utils/1.png)
+2. Upload utlity
+    ![plot](./src/utils/2.png)
+3. Click Analyse
+    ![plot](./src/utils/3.png)
+4. Loader
+   ![plot](./src/utils/4.png)
+5. Results Page
+   ![plot](./src/utils/5.png)
+6. Further Analysis
+   ![plot](./src/utils/6.png)
+7. Color to Gray scale as a dummy backend model 
+   ![plot](./src/utils/7.png)
