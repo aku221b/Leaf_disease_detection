@@ -1,7 +1,7 @@
-# Leaf_disease_detection
-## Leaf Detection Project \(integrating an ML Pipeline\) 
+# Leaf_detection
+\(Integrating an ML Pipeline\) 
 
-Welcome to my awesome project! This repository contains the source code and documentation for...
+Welcome to my awesome project! This repository contains the source code and documentation
 
 ### Getting Started
 
