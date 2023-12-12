@@ -15,7 +15,7 @@ To get started with this project, follow these steps:
    ```bash
    npm install
    ```
-3. Initiate a new conda environment with python version 3.10. install all the necessary python libraries
+3. Initiate a new conda environment with python version 3.10 and install all the necessary python libraries
 4. run merger.py file in Backend folder to initiate the backend server
    ```bash
    python merger.py
